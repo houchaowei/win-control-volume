@@ -143,16 +143,22 @@ static void listenVolume()
     IAudioEndpointVolume* endpointVolume = NULL;
     hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL,
         (LPVOID*)&endpointVolume);
-    // 设置回调函数
-
+    // 创建一个 VolumeChangeNotifier 实例
     VolumeChangeNotifier* notifier = new VolumeChangeNotifier();
+    // 注册通知
     hr = endpointVolume->RegisterControlChangeNotify(notifier);
     if (FAILED(hr))
     {
         cout << "RegisterControlChangeNotify failed" << endl;
         return;
     }
-    // 等待回调函数
-    Sleep(INFINITE);
+    // 无限循环，等待音量变化
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0))
+    {
+        // cout << "GetMessage" << endl;
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
     CoUninitialize();
 }

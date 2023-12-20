@@ -1,9 +1,7 @@
-#include <winnt.h>
-#include <minwindef.h>
-#include <Unknwnbase.h>
+#include <windows.h>
+#include <mmdeviceapi.h>
 #include <endpointvolume.h>
 #include <iostream>
-using namespace std;
 
 class VolumeChangeNotifier : public IAudioEndpointVolumeCallback
 {
@@ -51,17 +49,7 @@ public:
             return E_INVALIDARG;
         }
         //  ‰≥ˆ“Ù¡ø
-        cout << "Volume changed: " << pNotify->fMasterVolume << endl;
+        std::cout << (int)(pNotify->fMasterVolume * 100) << std::endl;
         return S_OK;
-    }
-
-    VolumeChangeNotifier(const LONG& _cRef)
-        : _cRef(_cRef)
-    {
-    }
-
-    bool operator==(const VolumeChangeNotifier& other) const
-    {
-        return false;
     }
 };
