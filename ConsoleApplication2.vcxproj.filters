@@ -18,9 +18,6 @@
     <ClCompile Include="volume.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="getVolume.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="VolumeChangeNotifier.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

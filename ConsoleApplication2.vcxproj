@@ -185,7 +185,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="volume.cpp" />
-    <ClCompile Include="getVolume.cpp" />
     <ClCompile Include="VolumeChangeNotifier.cpp" />
   </ItemGroup>
   <ItemGroup>
