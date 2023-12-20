@@ -162,3 +162,36 @@ static void listenVolume()
     }
     CoUninitialize();
 }
+
+// 监听系统输出音量变化，当音量变化时，输出音量
+static void listenVolumeMicrophone()
+{
+    HRESULT hr;
+    CoInitialize(NULL);
+    IMMDeviceEnumerator* deviceEnumerator = NULL;
+    hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER,
+        __uuidof(IMMDeviceEnumerator), (LPVOID*)&deviceEnumerator);
+    IMMDevice* defaultDevice = NULL;
+    hr = deviceEnumerator->GetDefaultAudioEndpoint(eCapture, eConsole, &defaultDevice);
+    IAudioEndpointVolume* endpointVolume = NULL;
+    hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL,
+        (LPVOID*)&endpointVolume);
+    // 创建一个 VolumeChangeNotifier 实例
+    VolumeChangeNotifier* notifier = new VolumeChangeNotifier();
+    // 注册通知
+    hr = endpointVolume->RegisterControlChangeNotify(notifier);
+    if (FAILED(hr))
+    {
+        cout << "RegisterControlChangeNotify failed" << endl;
+        return;
+    }
+    // 无限循环，等待音量变化
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0))
+    {
+        // cout << "GetMessage" << endl;
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    CoUninitialize();
+}

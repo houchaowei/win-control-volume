@@ -91,14 +91,19 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-    // 监听系统音量变化
+    // 监听系统输出音量变化, 当音量变化时，触发 OnNotify 方法
     else if (argc > 1 && strcmp(argv[1], "-w") == 0)
     {
         listenVolume();
     }
+    // 监听系统麦克风音量变化, 当音量变化时，触发 OnNotify 方法
+    else if (argc > 1 && strcmp(argv[1], "-wm") == 0)
+    {
+        listenVolumeMicrophone();
+    }
     else
     {
-        cout << "usage: volume [-m] [-o] [-s volume] [-mo] [-ms volume] [-mute] [-mt true/false]" << endl;
+        cout << "usage: volume [-m] [-o] [-s volume] [-mo] [-ms volume] [-mute] [-mute true|false] [-w] [-m]" << endl;
     }
 }
 
