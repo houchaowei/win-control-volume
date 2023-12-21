@@ -11,3 +11,11 @@ done：
 - [x] 设置静音状态：执行命令 volume.exe -mt [true/false]
 - [x] 监听系统输出音量变化，当音量变化时，会输出当前音量
 - [x] 监听系统输入音量变化，当音量变化时，会输出当前音量
+
+Usage:
+```sh
+$ ./volume.exe -o
+```
+
+Releases:
+https://github.com/houchaowei/win-control-volume/releases/tag/0.0.1
