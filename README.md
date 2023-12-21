@@ -1,5 +1,6 @@
 # win-control-volume
 windows 下控制系统音量。
+others：[macOS 下控制系统音量](https://github.com/houchaowei/mac-control-volume)
 
 done：
 - [x] 获取扬声器音量：执行命令 volume.exe -o
